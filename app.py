@@ -25,7 +25,7 @@ def index():
     data = response.json()
 
     # 必要な位置情報を取得
-    ip_address = data.get('ip')  
+    ip_address = = request.headers.get('X-Forwarded-For', request.remote_addr)
     city = geocoder.ip(ip_address).city
 
     if city is not None:
