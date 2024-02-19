@@ -15,10 +15,17 @@ API_KEY = "cb244b3767f2404bfebbbeaa1c3f7d4e"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    response = requests.get('https://api.ipify.org?format=json')
-    if response.status_code == 200:
-        ip_address = response.json()['ip']
+    # response = requests.get('https://api.ipify.org?format=json')
+    # if response.status_code == 200:
+    #     ip_address = response.json()['ip']
     # ip_address = request.remote_addr
+    client_ip = request.remote_addr  # クライアントのIPアドレスを取得
+
+    response = requests.get(f'https://api.ipify.org?format=json&ip={client_ip}')
+    data = response.json()
+
+    # 必要な位置情報を取得
+    ip_address = data.get('ip')  
     city = geocoder.ip(ip_address).city
 
     if city is not None:
