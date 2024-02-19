@@ -27,7 +27,7 @@ def index():
             weather_list = previous_data["weather"]
             temp_list = previous_data["temp"]
 
-        url = f"https://api.openweathermap.org/data/2.5/weather?q={location}&appid={API_KEY}&units=metric"
+        url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
         data = requests.get(url).json()
 
         # Extract weather info if the API call is successful, else error
