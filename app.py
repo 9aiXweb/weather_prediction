@@ -19,7 +19,7 @@ def index():
     if response.status_code == 200:
         ip_address = response.json()['ip']
     # ip_address = request.remote_addr
-    city = geocoder.ip(ip_address)
+    city = geocoder.ip(ip_address).city
 
     if city is not None:
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
