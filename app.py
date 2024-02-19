@@ -24,7 +24,7 @@ def index():
 
         # Extract weather info if the API call is successful, else error
         if data['cod'] == '404':
-            return render_template('index.html', city_list=None, weather_list=None, temp_list=None)
+            return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city)
         else:
             weather = data['weather'][0]['description']
             temp = data['main']['temp']
@@ -73,7 +73,8 @@ def index():
         #     with open('data/data.json', 'w') as f:
         #         json.dump(data_json, f, indent=3)
 
-        return render_template('index.html', city_list=None, weather_list=None, temp_list=None)
+        return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city)
+    else: return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0') 
