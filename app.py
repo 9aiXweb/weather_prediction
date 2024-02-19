@@ -57,7 +57,7 @@ def index():
 
         # Extract weather info if the API call is successful, else error
         if data['cod'] == '404':
-            return render_template('index.html', city_list=city_list, weather_list=weather_list, temp_list=temp_list)
+            return render_template('index.html', city_list=None, weather_list=None, temp_list=None)
         else:
             weather = data['weather'][0]['description']
             temp = data['main']['temp']
