@@ -40,7 +40,7 @@ def index():
             with open('data/data.json', 'w') as f:
                 json.dump(data_json, f, indent=3)
 
-        return render_template('index.html', city_list=city_list, weather_list=weather_list, temp_list=temp_list)
+        return render_template('index.html', city_list=city_list, weather_list=weather_list, temp_list=temp_list, ip=ip_address, city=city)
     
     elif request.method == 'POST':
         # with open('data/data.json', encoding='utf-8') as f:
