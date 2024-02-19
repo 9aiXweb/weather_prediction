@@ -1,3 +1,5 @@
 flask
 requests
+geocode
+json
 gunicorn
