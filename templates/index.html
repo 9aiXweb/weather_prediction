@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+</head>
+<body>
+    <h1>Weather App</h1>
+    <form method="POST">
+        <input type="text" name="city" placeholder="Enter City">
+        <button type="submit">Get Weather</button>
+    </form>
+
+    {% if city %} 
+        <h2>Weather in {{ city }}:</h2>
+        {% if error %}
+            <p>{{ error }}</p>
+        {% else %}
+            <p>{{ weather }} - {{ temp }} °C</p>
+        {% endif %}         
+    {% endif %}
+
+</body>
+</html>
