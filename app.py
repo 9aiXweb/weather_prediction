@@ -48,7 +48,7 @@ def index():
         #     with open('data/data.json', 'w') as f:
         #         json.dump(data_json, f, indent=3)
 
-        # return render_template('index.html', city_list=city_list, weather_list=weather_list, temp_list=temp_list)
+        return render_template('index.html', city_list=None, weather_list=None, temp_list=None)
 
     else:
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
