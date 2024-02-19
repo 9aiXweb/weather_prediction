@@ -11,9 +11,17 @@
         <button type="submit">Get Weather</button>
     </form>
 
-    {% if city %} 
-        <h2>Weather in {{ city }}:</h2>
-            <p>{{ weather }} - {{ temp }} °C</p>      
-    {% endif %}
+{% if city_list is not none%}
+
+<table>
+    <tbody>
+        {% for i in range(city_list|length) %}
+        <tr>
+            <td>{{city_list[i]}} - {{weather_list[i]}} - {{temp_list[i]}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
 </body>
 </html>
