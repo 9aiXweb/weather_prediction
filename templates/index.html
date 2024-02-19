@@ -12,12 +12,7 @@
 
     {% if city %} 
         <h2>Weather in {{ city }}:</h2>
-        {% if error %}
-            <p>{{ error }}</p>
-        {% else %}
-            <p>{{ weather }} - {{ temp }} °C</p>
-        {% endif %}         
+            <p>{{ weather }} - {{ temp }} °C</p>      
     {% endif %}
-
 </body>
 </html>

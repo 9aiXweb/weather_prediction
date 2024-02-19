@@ -14,16 +14,15 @@ def index():
 
         # Extract weather info if the API call is successful, else error
         if data['cod'] == '404':
-            error = 'City not found!'
+            return render_template('index.html')
         else:
             weather = data['weather'][0]['description']
             temp = data['main']['temp']
-            error = None
 
-        return render_template('index.html', city=city, weather=weather, temp=temp, error=error)
+        return render_template('index.html', city=city, weather=weather, temp=temp)
 
     else:
         return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0') 
+    app.run(host='0.0.0.0') 
