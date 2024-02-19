@@ -15,7 +15,10 @@ API_KEY = "cb244b3767f2404bfebbbeaa1c3f7d4e"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    ip_address = request.remote_addr
+    response = requests.get('https://api.ipify.org?format=json')
+    if response.status_code == 200:
+        ip_address = response.json()['ip']
+    # ip_address = request.remote_addr
     city = geocoder.ip(ip_address)
 
     if city is not None:
