@@ -34,22 +34,24 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float
 from flask_sqlalchemy import SQLAlchemy
 
-# Database config 
 DB_URI = 'sqlite:///weather_data.db'  # Using SQLite (adjust for other DBs)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 db = SQLAlchemy(app)
 
+Base = declarative_base()
+
 # Weather data model
-class WeatherData(db.Model):
+class WeatherData(Base):
+    __tablename__ = 'weather_data'
     id = Column(Integer, primary_key=True)
     city = Column(String(80), nullable=False)
     description = Column(String(120))
     temperature = Column(Float)
 
 # Create database tables (Run once initially to set up DB)
-db.create_all() 
+Base.metadata.create_all(db.engine)
 
 API_KEY = "cb244b3767f2404bfebbbeaa1c3f7d4e"  
 
@@ -66,7 +68,10 @@ def index():
         else:
             weather = data['weather'][0]['description']
             temp = data['main']['temp']
-
+            # Save weather data to the database
+            weather_entry = WeatherData(city=city, description=weather, temperature=temp)
+            db.session.add(weather_entry)
+            db.session.commit()
         return render_template('index.html', city=city, weather=weather, temp=temp)
 
     else:
