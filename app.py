@@ -18,6 +18,7 @@ def index():
         else:
             weather = data['weather'][0]['description']
             temp = data['main']['temp']
+            error = None
 
         return render_template('index.html', city=city, weather=weather, temp=temp, error=error)
 
