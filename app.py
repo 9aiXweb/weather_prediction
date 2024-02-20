@@ -95,7 +95,7 @@ def index():
         #     with open('data/data.json', 'w') as f:
         #         json.dump(data_json, f, indent=3)
 
-        return return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city, isp=isp)
+        return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city, isp=isp)
     else: return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city, isp=isp)
 
 
