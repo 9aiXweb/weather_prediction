@@ -10,11 +10,20 @@ city_list = []
 weather_list = []
 temp_list = []
 
-
-API_KEY = "cb244b3767f2404bfebbbeaa1c3f7d4e"  
+def get_isp_details(ip_addr):
+    # Replace 'your_api_key' with your actual API key
+    api_key = '84106a85dbecc8'
+    url = f"https://ipinfo.io/{ip_addr}?token={api_key}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        return data.get('org')  # 'org' usually contains the ISP information
+    else:
+        return "ISP information not available"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    API_KEY = "cb244b3767f2404bfebbbeaa1c3f7d4e"  
     # response = requests.get('https://api.ipify.org?format=json')
     # if response.status_code == 200:
     #     ip_address = response.json()['ip']
@@ -29,6 +38,7 @@ def index():
     ip_list = ip_address.split(", ")
     ip_address = ip_list[0]
     city = geocoder.ip(ip_address).city
+    isp = get_isp_details(ip_address)
 
     if city is not None:
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
@@ -36,7 +46,7 @@ def index():
 
         # Extract weather info if the API call is successful, else error
         if data['cod'] == '404':
-            return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city)
+            return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city, isp=isp)
         else:
             weather = data['weather'][0]['description']
             temp = data['main']['temp']
@@ -52,7 +62,7 @@ def index():
             with open('data/data.json', 'w') as f:
                 json.dump(data_json, f, indent=3)
 
-        return render_template('index.html', city_list=city_list, weather_list=weather_list, temp_list=temp_list, ip=ip_address, city=city)
+            return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city, isp=isp)
     
     elif request.method == 'POST':
         # with open('data/data.json', encoding='utf-8') as f:
@@ -85,8 +95,9 @@ def index():
         #     with open('data/data.json', 'w') as f:
         #         json.dump(data_json, f, indent=3)
 
-        return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city)
-    else: return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city)
+        return return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city, isp=isp)
+    else: return render_template('index.html', city_list=None, weather_list=None, temp_list=None, ip=ip_address, city=city, isp=isp)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0') 
