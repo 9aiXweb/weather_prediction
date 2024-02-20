@@ -31,7 +31,7 @@ def get_info_details(ip_addr):
             'timezone': data.get('timezone'),
             'temp': None,
             'weather':None,
-            'language':data2.get('language')
+            'language':data2['language']
         }
         return info  # 'org' usually contains the ISP information
     else:
