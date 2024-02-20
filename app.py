@@ -46,8 +46,8 @@ def index():
     # 必要な位置情報を取得
     ip_address =  request.headers.get('X-Forwarded-For', request.remote_addr)
     # ip_list = ip_address.split(", ")
-    # ip_address = ip_list[0]
-    ip_list = ip_address.split(", ")[0].strip()
+    ip_list = ip_address.split(", ")[0]
+    ip_address = ip_list[0].strip()
     # city = geocoder.ip(ip_address).city
     info = get_info_details(ip_address)
     city = info['city']
