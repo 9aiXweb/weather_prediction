@@ -12,10 +12,10 @@ def get_info_details(ip_addr):
     api_geolocation = 'e09ab315a1e64d67a73ce8bf111b5e55'
     url = f"https://ipinfo.io/{ip_addr}?token={api_key}"
     response = requests.get(url)
-
+    data = response.json()
     url = f"https://api.ipgeolocation.io/ipgeo?apiKey={api_geolocation}&ip={ip_addr}"
     response = requests.get(url)
-    data = response.json()
+    language = response.json()
 
     # 言語情報を取得
     language = data.get('languages')
@@ -34,7 +34,7 @@ def get_info_details(ip_addr):
             'timezone': data.get('timezone'),
             'temp': None,
             'weather':None,
-            'language':language
+            'language':language.get('language')
         }
         return info  # 'org' usually contains the ISP information
     else:
