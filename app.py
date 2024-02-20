@@ -25,11 +25,7 @@ def get_info_details(ip_addr):
             'loc': data.get('loc'),
             'org': data.get('org'),
             'postal': data.get('postal'),
-            'timezone': data.get('timezone'),
-            'asn': data.get('asn'),
-            'company': data.get('company'),
-            'privacy': data.get('privacy'),
-            'abuse': data.get('abuse')
+            'timezone': data.get('timezone')
         }
         return info  # 'org' usually contains the ISP information
     else:
