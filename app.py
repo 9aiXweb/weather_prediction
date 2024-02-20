@@ -75,9 +75,7 @@ def index():
             return render_template('index.html', info=info, city_list=city_list, weather_list=weather_list, temp_list=temp_list,
                                    ip_address=ip_address, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )  
-    else: return render_template('index.html', info=info, city_list=None, weather_list=None, temp_list=None,
-                                 ip_address=ip_address,
-                                 client_ip=client_ip,
+    else: return render_template('index.html', info=None, city_list=None, weather_list=None, temp_list=None
                                 )
 
 
