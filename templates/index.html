@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Weather App</title>
+    <title>Info-Retriever</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Weather App</h1>
+    <h1>Information Retriever App</h1>
     <form method="POST">
         <!-- <input type="text" name="city" placeholder="Enter City"> -->
-        <button type="submit">Get Weather</button>
+        <!-- <button type="submit">Get Weather</button> -->
     </form>
-    
-    <p> IP: {{ ip }} </p>
-    <p> CITY: {{ city }} </p>
-    <p> ISP: {{ isp }} </p>
+    {% if info is not none%}
+    <ul>
+        {% for key, value in info.items() %}
+            <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
 
 {% if city_list is not none%}
