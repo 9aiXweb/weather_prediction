@@ -58,7 +58,7 @@ def index():
                                    )
         else:
             info['weather'] = data['weather'][0]['description']
-            info['temp'] = data['main']['temp']+"°c"
+            info['temp'] = str(data['main']['temp']) +"°c"
             
             return render_template('index.html', info=info,  LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )  
