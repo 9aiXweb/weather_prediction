@@ -38,10 +38,6 @@ def get_info_details(ip_addr):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     API_KEY = "cb244b3767f2404bfebbbeaa1c3f7d4e"  
-    # response = requests.get('https://api.ipify.org?format=json')
-    # if response.status_code == 200:
-    #     ip_address = response.json()['ip']
-    # ip_address = request.remote_addr
     client_ip = request.remote_addr  # クライアントのIPアドレスを取得
 
     response = requests.get(f'https://api.ipify.org?format=json&ip={client_ip}')
@@ -50,7 +46,7 @@ def index():
     # 必要な位置情報を取得
     ip_address =  request.headers.get('X-Forwarded-For', request.remote_addr)
     ip_list = ip_address.split(", ")
-    ip_address = ip_list[2]
+    ip_address = ip_list[0]
     # city = geocoder.ip(ip_address).city
     info = get_info_details(ip_address)
     city = info['city']
