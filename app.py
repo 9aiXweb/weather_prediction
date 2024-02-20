@@ -5,9 +5,6 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-city_list = []
-weather_list = []
-temp_list = []
 
 def get_info_details(ip_addr):
     # Replace 'your_api_key' with your actual API key
@@ -45,7 +42,6 @@ def index():
     ip_address =  request.headers.get('X-Forwarded-For', request.remote_addr)
     ip_list = ip_address.split(", ")
     ip_address = ip_list[0]
-    # city = geocoder.ip(ip_address).city
     info = get_info_details(ip_address)
 
     if info is not None:
@@ -57,17 +53,13 @@ def index():
 
         # Extract weather info if the API call is successful, else error
         if data['cod'] == '404':
-            return render_template('index.html', info=info,
-                                   ip_address=ip_address, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
+            return render_template('index.html', info=info, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )
         else:
             info['weather'] = data['weather'][0]['description']
             info['temp'] = data['main']['temp']
             
-
-
-            return render_template('index.html', info=info,
-                                   ip_address=ip_address, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
+            return render_template('index.html', info=info, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )  
     else: return render_template('index.html', info=None)
 
