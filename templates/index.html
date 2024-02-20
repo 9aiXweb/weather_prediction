@@ -6,10 +6,7 @@
 </head>
 <body>
     <h1>Information Retriever App</h1>
-    <!-- <form method="POST"> -->
-        <!-- <input type="text" name="city" placeholder="Enter City"> -->
-        <!-- <button type="submit">Get Weather</button> -->
-    <!-- </form> -->
+    <p> MY-IP: {{ ip_address }}</pp>
     {% if info is not none%}
     <ul>
         {% for key, value in info.items() %}
