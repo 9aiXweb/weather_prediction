@@ -52,9 +52,9 @@ def index():
     ip_address =  request.headers.get('X-Forwarded-For', request.remote_addr)
     ip_list = ip_address.split(", ")
     ip_address = ip_list[0]
-    city = info['city']
     # city = geocoder.ip(ip_address).city
     info = get_info_details(ip_address)
+    city = info['city']
 
     if info is not None:
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
