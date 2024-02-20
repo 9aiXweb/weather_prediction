@@ -11,6 +11,7 @@ def get_info_details(ip_addr):
     api_key = '84106a85dbecc8'
     url = f"https://ipinfo.io/{ip_addr}?token={api_key}"
     response = requests.get(url)
+
     if response.status_code == 200:
         data = response.json()
         info = {
@@ -28,7 +29,7 @@ def get_info_details(ip_addr):
         }
         return info  # 'org' usually contains the ISP information
     else:
-        return "ISP information not available"
+        return None
 
 @app.route('/')
 def index():
@@ -53,13 +54,13 @@ def index():
 
         # Extract weather info if the API call is successful, else error
         if data['cod'] == '404':
-            return render_template('index.html', info=info, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
+            return render_template('index.html', info=info,  LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )
         else:
             info['weather'] = data['weather'][0]['description']
-            info['temp'] = data['main']['temp']
+            info['temp'] = data['main']['temp']+"°c"
             
-            return render_template('index.html', info=info, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
+            return render_template('index.html', info=info,  LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )  
     else: return render_template('index.html', info=None)
 
