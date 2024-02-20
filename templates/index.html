@@ -23,7 +23,7 @@
         }
 
         #map {
-            width: 100%;
+            width: 70%;
             height: 400px;
             margin-top: 20px;
         }
@@ -57,10 +57,6 @@
             <li>{{ key }}: {{ value }}</li>
         {% endfor %}
     </ul>
-    {% endif %}
-
-
-{% if city_list is not none%}
 <table>
     <tbody>
         {% for i in range(city_list|length) %}

@@ -25,13 +25,15 @@ def get_info_details(ip_addr):
             'loc': data.get('loc'),
             'org': data.get('org'),
             'postal': data.get('postal'),
-            'timezone': data.get('timezone')
+            'timezone': data.get('timezone'),
+            'temp': None,
+            'weather':None,
         }
         return info  # 'org' usually contains the ISP information
     else:
         return "ISP information not available"
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
     API_KEY = "cb244b3767f2404bfebbbeaa1c3f7d4e"  
     client_ip = request.remote_addr  # クライアントのIPアドレスを取得
@@ -49,34 +51,25 @@ def index():
     if info is not None:
         city = info['city']
         LATITUDE, LONGITUDE = info['loc'].split(',')
+        
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
         data = requests.get(url).json()
 
         # Extract weather info if the API call is successful, else error
         if data['cod'] == '404':
-            return render_template('index.html', info=info, city_list=city_list, weather_list=weather_list, temp_list=temp_list,
+            return render_template('index.html', info=info,
                                    ip_address=ip_address, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )
         else:
-            weather = data['weather'][0]['description']
-            temp = data['main']['temp']
-            city_list.append(city)
-            weather_list.append(weather)
-            temp_list.append(temp)
+            info['weather'] = data['weather'][0]['description']
+            info['temp'] = data['main']['temp']
+            
 
-            data_json = {
-                'city': city_list,
-                'weather': weather_list,
-                'temp':temp_list
-            }
-            with open('data/data.json', 'w') as f:
-                json.dump(data_json, f, indent=3)
 
-            return render_template('index.html', info=info, city_list=city_list, weather_list=weather_list, temp_list=temp_list,
+            return render_template('index.html', info=info,
                                    ip_address=ip_address, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )  
-    else: return render_template('index.html', info=None, city_list=None, weather_list=None, temp_list=None
-                                )
+    else: return render_template('index.html', info=None)
 
 
 if __name__ == '__main__':
