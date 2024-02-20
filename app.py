@@ -72,9 +72,9 @@ def index():
             with open('data/data.json', 'w') as f:
                 json.dump(data_json, f, indent=3)
 
-            return render_template('index.html', info=info, city_list=None, weather_list=None, temp_list=None,
+            return render_template('index.html', info=info, city_list=city_list, weather_list=weather_list, temp_list=temp_list,
                                    ip_address=ip_address, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
-                                   )      
+                                   )  
     else: return render_template('index.html', info=info, city_list=None, weather_list=None, temp_list=None,
                                  ip_address=ip_address,
                                  client_ip=client_ip,
