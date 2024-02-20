@@ -17,9 +17,6 @@ def get_info_details(ip_addr):
     response = requests.get(url)
     language = response.json()
 
-    # 言語情報を取得
-    language = data.get('languages')
-
     if response.status_code == 200:
         data = response.json()
         info = {
