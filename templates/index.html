@@ -6,7 +6,8 @@
 </head>
 <body>
     <h1>Information Retriever App</h1>
-    <p> MY-IP: {{ ip_address }}</pp>
+    <p> client-IP: {{ client_ip }}</pp>
+    <p> MY-IP: {{ ip_address }}</p>
     {% if info is not none%}
     <ul>
         {% for key, value in info.items() %}
