@@ -45,17 +45,17 @@ def index():
     ip_address = ip_list[0]
     # city = geocoder.ip(ip_address).city
     info = get_info_details(ip_address)
-    city = info['city']
 
     if info is not None:
+        city = info['city']
+        LATITUDE, LONGITUDE = info['loc'].split(',')
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
         data = requests.get(url).json()
 
         # Extract weather info if the API call is successful, else error
         if data['cod'] == '404':
             return render_template('index.html', info=info, city_list=None, weather_list=None, temp_list=None,
-                                   ip_address=ip_address,
-                                   client_ip=client_ip,
+                                   ip_address=ip_address, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )
         else:
             weather = data['weather'][0]['description']
@@ -73,8 +73,7 @@ def index():
                 json.dump(data_json, f, indent=3)
 
             return render_template('index.html', info=info, city_list=None, weather_list=None, temp_list=None,
-                                   ip_address=ip_address,
-                                   client_ip=client_ip,
+                                   ip_address=ip_address, client_ip=client_ip, LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )      
     else: return render_template('index.html', info=info, city_list=None, weather_list=None, temp_list=None,
                                  ip_address=ip_address,

@@ -3,6 +3,11 @@
 <head>
     <title>Info-Retriever</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map { height: 400px; }
+    </style>
 </head>
 <body>
     <h1>Information Retriever App</h1>
@@ -27,6 +32,20 @@
         {% endfor %}
     </tbody>
 </table>
+
+<div id="map"></div>
+
+<script>
+    var map = L.map('map').setView([LATITUDE, LONGITUDE], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+
+    L.marker([LATITUDE, LONGITUDE]).addTo(map)
+        .bindPopup('Your Location')
+        .openPopup();
+</script>
 {% endif %}
 </body>
 </html>
