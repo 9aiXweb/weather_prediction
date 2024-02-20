@@ -1,6 +1,6 @@
 import requests
 import json
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
@@ -13,9 +13,10 @@ def get_info_details(ip_addr):
     url = f"https://ipinfo.io/{ip_addr}?token={api_key}"
     response = requests.get(url)
     data = response.json()
+    
     url = f"https://api.ipgeolocation.io/ipgeo?apiKey={api_geolocation}&ip={ip_addr}"
-    response = requests.get(url)
-    language = response.json()
+    response2 = requests.get(url)
+    data2 = response2.json()
 
     if response.status_code == 200:
         data = response.json()
@@ -31,7 +32,7 @@ def get_info_details(ip_addr):
             'timezone': data.get('timezone'),
             'temp': None,
             'weather':None,
-            'language':language.get('language')
+            'language':data2.get('language')
         }
         return info  # 'org' usually contains the ISP information
     else:
