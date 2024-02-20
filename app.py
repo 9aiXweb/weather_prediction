@@ -9,8 +9,16 @@ app = Flask(__name__)
 def get_info_details(ip_addr):
     # Replace 'your_api_key' with your actual API key
     api_key = '84106a85dbecc8'
+    api_geolocation = 'e09ab315a1e64d67a73ce8bf111b5e55'
     url = f"https://ipinfo.io/{ip_addr}?token={api_key}"
     response = requests.get(url)
+
+    url = f"https://api.ipgeolocation.io/ipgeo?apiKey={api_geolocation}&ip={ip_addr}"
+    response = requests.get(url)
+    data = response.json()
+
+    # 言語情報を取得
+    language = data.get('country_code2')
 
     if response.status_code == 200:
         data = response.json()
@@ -26,6 +34,7 @@ def get_info_details(ip_addr):
             'timezone': data.get('timezone'),
             'temp': None,
             'weather':None,
+            'language':language
         }
         return info  # 'org' usually contains the ISP information
     else:
