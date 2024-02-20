@@ -18,7 +18,7 @@ def get_info_details(ip_addr):
     data = response.json()
 
     # 言語情報を取得
-    language = data.get('country_code2')
+    language = data.get('languages')
 
     if response.status_code == 200:
         data = response.json()
