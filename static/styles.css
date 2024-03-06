@@ -45,6 +45,7 @@ body{
 
 #showcase{
   background-image: url('images/showcase4.jpeg');
+  color: white;
   background-position: center right;
   min-height: 300px;
 
