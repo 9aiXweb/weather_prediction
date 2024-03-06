@@ -1,4 +1,6 @@
 body{
+  max-width: 500px;
+  max-height: 300px;
   background-color: #f4f4f4;
   color: #555;
   font-family: "Comic Sans MS";
