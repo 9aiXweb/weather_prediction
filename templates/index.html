@@ -5,52 +5,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        #map {
-            width: 70%;
-            height: 400px;
-            margin-top: 20px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-    <h1>Information Retriever App</h1>
+    <header id="main-header">
+        <div class="container">
+            <h1>Information Retriever App</h1>
+        </div>  
+    </header>
+    <nav id="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
     {% if info is not none%}
-    <ul>
+    <ul id="showcase">
         {% for key, value in info.items() %}
             <li>{{ key }}: {{ value }}</li>
         {% endfor %}
@@ -80,5 +53,9 @@
 </script>
 {% endif %}
 </div>
+
+<footer id="main-footer">
+    <p>Copyright &copy; 2024 My Website</p>
+</footer>
 </body>
 </html>

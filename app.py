@@ -48,7 +48,9 @@ def index():
     # 必要な位置情報を取得
     ip_address =  request.headers.get('X-Forwarded-For', request.remote_addr)
     ip_list = ip_address.split(", ")
+    print(ip_address)
     ip_address = ip_list[0]
+    print(ip_address)
     info = get_info_details(ip_address)
 
     if info is not None:
@@ -72,5 +74,6 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0') 
+    # app.run(host='0.0.0.0', port=5000, debug=True) 
+    app.run(port=5000, debug=True) 
 
