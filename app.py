@@ -71,9 +71,10 @@ def index():
             return render_template('index.html', info=info,  LATITUDE=LATITUDE, LONGITUDE=LONGITUDE
                                    )  
     else: return render_template('index.html', info=None)
+    # return render_template('index.html', info=None)
 
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=5000, debug=True) 
-    app.run(port=5000, debug=True) 
+    app.run(host='0.0.0.0', port=5000, debug=True) 
+    # app.run(port=5000, debug=True) 
 

@@ -16,7 +16,7 @@ body{
 #main-header{
   font-family: "Comic Sans MS";
   font-size: 30px;
-  background-image: url('../images/header.jpeg');
+  background-image: url('images/header.jpeg');
   text-align: center;
   background-color:coral;
   color: #333;
@@ -44,12 +44,13 @@ body{
 }
 
 #showcase{
-  background-image: url('../images/showcase4.jpeg');
+  background-image: url('images/showcase4.jpeg');
   background-position: center right;
   min-height: 300px;
 
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
+  width: 30px;
 }
 
 #showcase h1{
