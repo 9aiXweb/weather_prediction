@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Info-Retriever</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
-</head>
-<body>
-    <header id="main-header">
-        <div class="container">
-            <h1>Information Retriever App</h1>
-        </div>  
-    </header>
-    <nav id="navbar">
-        <div class="container">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-    {% if info is not none%}
-    <ul id="showcase">
-        {% for key, value in info.items() %}
-            <li>{{ key }}: {{ value }}</li>
-        {% endfor %}
-    </ul>
-<table>
-    <tbody>
-        {% for i in range(city_list|length) %}
-        <tr>
-            <td>{{city_list[i]}} - {{weather_list[i]}} - {{temp_list[i]}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <head>
+        <title>Info-Retriever</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    </head>
+    <body>
+        <header id="main-header">
+            <div class="container">
+                <h1>Information Retriever App</h1>
+            </div>  
+        </header>
+        <nav id="navbar">
+            <div class="container">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <section id="showcase">
+            <div class="container">
+                {% if info is not none%}
+                <ul>
+                    {% for key, value in info.items() %}
+                        <li>{{ key }}: {{ value }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    <table>
+        <tbody>
+            {% for i in range(city_list|length) %}
+            <tr>
+                <td>{{city_list[i]}} - {{weather_list[i]}} - {{temp_list[i]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-<div id="map"></div>
+    <div id="map">
+    <script>
+        var map = L.map('map').setView([{{ LATITUDE }}, {{ LONGITUDE }}], 13);
 
-<script>
-    var map = L.map('map').setView([{{ LATITUDE }}, {{ LONGITUDE }}], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19
-    }).addTo(map);
+        L.marker([{{ LATITUDE}}, {{ LONGITUDE}}]).addTo(map)
+            .bindPopup('Your Location')
+            .openPopup();
+    </script>
+    </div>
+    {% endif %}
 
-    L.marker([{{ LATITUDE}}, {{ LONGITUDE}}]).addTo(map)
-        .bindPopup('Your Location')
-        .openPopup();
-</script>
-{% endif %}
-</div>
-
-<footer id="main-footer">
-    <p>Copyright &copy; 2024 by 9aiXweb</p>
-</footer>
-</body>
+    <footer id="main-footer">
+        <p>Copyright &copy; 2024 by 9aiXweb</p>
+    </footer>
+    </body>
 </html>
