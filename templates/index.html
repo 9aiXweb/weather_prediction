@@ -43,17 +43,19 @@
     </table>
 
     <div id="map">
-    <script>
-        var map = L.map('map').setView([{{ LATITUDE }}, {{ LONGITUDE }}], 13);
+        <div class="container">
+            <script>
+                var map = L.map('map').setView([{{ LATITUDE }}, {{ LONGITUDE }}], 13);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19
-        }).addTo(map);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19
+                }).addTo(map);
 
-        L.marker([{{ LATITUDE}}, {{ LONGITUDE}}]).addTo(map)
-            .bindPopup('Your Location')
-            .openPopup();
-    </script>
+                L.marker([{{ LATITUDE}}, {{ LONGITUDE}}]).addTo(map)
+                    .bindPopup('Your Location')
+                    .openPopup();
+            </script>
+        </div>
     </div>
     {% endif %}
 
